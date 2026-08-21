@@ -50,6 +50,8 @@ export function Home() {
     <div className="space-y-6 px-6 pb-8">
       {/* ------------------------------ Cabecalho ----------------------------- */}
       <header className="flex items-center gap-3 pt-1">
+        {/* Toda tela precisa de um h1; aqui o titulo e so para leitor de tela. */}
+        <h1 className="sr-only">Início</h1>
         <Avatar initials={account.initials} />
         <div className="min-w-0 flex-1">
           <p className="text-[12px] text-muted">Bom dia,</p>
