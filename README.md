@@ -77,7 +77,8 @@ flowchart TD
 ```
 
 As quatro abas fixas (Início, Extrato, Cartões, Mais) e o botão flutuante do Pix
-ficam na navegação inferior. As telas de fluxo — login, passos do Pix, comprovante,
+ficam na navegação inferior.
+As telas de fluxo — login, passos do Pix, comprovante,
 detalhe e notificações — abrem sem a barra, como telas empilhadas.
 
 ---
