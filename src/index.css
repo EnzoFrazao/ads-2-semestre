@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-neon: #00ff87;
+  --color-cyan: #00d4ff;
+  --color-void: #05050f;
+  --color-surface: #0d0d1a;
+  --color-card: #111128;
+  --color-border: #1e1e40;
+  --color-muted: #3a3a6a;
+  --color-fg: #e8e8ff;
+  --color-fg-dim: #8888bb;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #05050f;
+  color: #e8e8ff;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #05050f; }
+::-webkit-scrollbar-thumb { background: #00ff87; border-radius: 2px; }
+
+/* Neon glow utilities */
+.glow-neon {
+  text-shadow: 0 0 20px #00ff87, 0 0 40px #00ff8755;
+}
+
+.glow-cyan {
+  text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff55;
+}
+
+.glow-box {
+  box-shadow: 0 0 20px #00ff8722, inset 0 0 20px #00ff8705;
+}
+
+.glow-box-hover:hover {
+  box-shadow: 0 0 30px #00ff8733, 0 0 60px #00ff8711, inset 0 0 30px #00ff8708;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Grid overlay background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 135, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 135, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Scanline effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: #00ff87;
+}
+
+/* Fade in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+/* Glitch animation */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s infinite;
+}
+
+/* Progress bar animation */
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--fill); }
+}
+
+.skill-bar {
+  animation: fillBar 1.2s ease forwards;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Section transition */
+section {
+  transition: opacity 0.3s;
+}
+
+/* Tag style */
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid #00ff8744;
+  color: #00ff87;
+  background: #00ff8708;
+}

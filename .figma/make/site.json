@@ -1,0 +1,10 @@
+{
+  "description": "Create stunning, futuristic portfolios by analyzing GitHub profiles, showcasing skills and projects to enhance personal branding for developers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
