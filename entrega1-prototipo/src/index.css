@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ============================================================
+   techX — Design tokens
+   Direção visual herdada da v4 do Figma Make (dark + roxo),
+   porém com contraste verificado (WCAG AA) e escala de 8px.
+   ============================================================ */
+@theme {
+  /* Superfícies */
+  --color-bg: #0f0f14;
+  --color-surface: #17171f;
+  --color-surface-2: #1e1e29;
+  --color-surface-3: #262633;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.14);
+
+  /* Texto — todos verificados >= 4.5:1 sobre bg e surface-2 */
+  --color-ink: #f5f5f7; /* 17.4:1 sobre bg */
+  --color-dim: #a0a0b0; /* 7.4:1 sobre bg · 6.4:1 sobre surface-2 */
+  --color-muted: #8a8a9e; /* 5.6:1 sobre bg · 4.9:1 sobre surface-2 */
+
+  /* Marca */
+  --color-brand: #7c5cff;
+  --color-brand-2: #a78bfa;
+  --color-brand-dim: rgba(124, 92, 255, 0.16);
+
+  /* Semânticas */
+  --color-success: #34d399;
+  --color-success-dim: rgba(52, 211, 153, 0.14);
+  --color-danger: #f87171;
+  --color-danger-dim: rgba(248, 113, 113, 0.14);
+  --color-warn: #fbbf24;
+  --color-warn-dim: rgba(251, 191, 36, 0.14);
+
+  /* Tipografia */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Raios */
+  --radius-card: 16px;
+  --radius-pill: 999px;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: #08080c;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Foco visível — ausente por completo na versão do Figma Make */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-2);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Numerais tabulares para valores monetários alinharem em coluna */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .brand-gradient {
+    background-image: linear-gradient(135deg, #7c5cff 0%, #a78bfa 55%, #c4b5fd 100%);
+  }
+}
+
+/* Respeita quem pediu menos movimento — a v4 animava sem checar */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Congela animações durante a captura de screenshots */
+html[data-capture="true"] *,
+html[data-capture="true"] *::before,
+html[data-capture="true"] *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Animação da tela de sucesso do Pix */
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
