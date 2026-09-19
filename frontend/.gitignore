@@ -1,8 +1,0 @@
-# Lixo de sistema operacional
-.DS_Store
-Thumbs.db
-
-# Memoria tecnica local (handoff entre agentes) - fora do repositorio publico.
-# Cada entrega tem o seu proprio .gitignore; este vale so para a raiz.
-/specs/
-/docs/state.md

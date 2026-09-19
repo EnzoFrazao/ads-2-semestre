@@ -16,6 +16,37 @@ efeito de glitch no nome, barras de skill animadas por scroll e navegação com 
 
 ---
 
+Entregável da Semana 03 de **Design de Experiência e Prototipação**: prototipação do
+portfólio pessoal.
+
+## Link do Figma
+
+**[Portfólio — Enzo Frazao (Figma Make)](https://pic-bliss-16822046.figma.site)**
+
+## 1. Apresentação
+
+Enzo Frazão — Backend Developer & Software Engineer, com passagem por Java/Spring Boot,
+PHP/Laravel e Python/FastAPI. Fundador da **SafeWork**, plataforma de IA para segurança
+ocupacional, e atualmente desenvolvendo soluções para o Governo do Maranhão (STC/MA).
+Estudante de Engenharia de Software.
+
+## 2. Stacks / habilidades
+
+PHP/Laravel, Java/Spring Boot, Python/FastAPI, PostgreSQL/Redis, Docker,
+Next.js/TypeScript, n8n/Automação — além de REST APIs, microsserviços, autenticação
+JWT, CI/CD, Linux, Git, ORM, MVC, SOLID e Clean Architecture.
+
+## 3. Projetos
+
+SafeWork, Agiliza Transparência (STC/MA), Project IA, Vértice Consultoria,
+Gerenciamento de Solicitações e TechX Front — seis projetos, cada um com ícone, tag,
+descrição, stack e link direto para o repositório no GitHub.
+
+> **Nota de escopo**: o enunciado pede uma página individual navegável por projeto
+> (clicar no card leva a uma tela de detalhe). Nesta versão, os cards linkam direto para
+> o repositório no GitHub em vez de abrir uma tela de detalhe interna — esse requisito
+> específico não foi implementado nesta entrega.
+
 ## Preview
 
 ### `01.` Hero — apresentação e terminal interativo

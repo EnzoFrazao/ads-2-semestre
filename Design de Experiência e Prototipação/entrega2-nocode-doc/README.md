@@ -9,6 +9,15 @@
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white">
 </p>
 
+Entregável da Semana 02 de **Design de Experiência e Prototipação**: documentação das
+telas construídas em aula para o desafio sorteado desta turma. O User Flow de login +
+Pix, feito a partir da navegação deste protótipo, está na
+[Entrega 1](../entrega1-userflow/).
+
+---
+
+## 1. Sobre o projeto
+
 Este repositório nasceu de um wireframe gerado no **Figma Make**. O arquivo original
 tinha 5 telas dentro de um único `App.tsx`, sem rotas, sem tipos, sem estados de
 carregamento e usando emojis no lugar de ícones. Aqui ele foi auditado, reescrito e
@@ -16,9 +25,30 @@ estendido para **13 telas** com fluxo real, acessibilidade e um design system
 documentado. O detalhe do que mudou está em
 [O que mudou em relação ao Figma Make](#o-que-mudou-em-relação-ao-figma-make).
 
----
+## 2. Problema
 
-## Telas
+> **Nota de transparência**: o enunciado exato sorteado em aula para este desafio não
+> ficou registrado por escrito. A descrição abaixo foi reconstruída a partir do que o
+> protótipo entregue resolve na prática, não é uma transcrição literal do enunciado
+> original.
+
+Pessoas que usam um banco digital no dia a dia precisam **acompanhar o saldo, entender
+para onde o dinheiro está indo e transferir dinheiro por Pix de forma rápida e segura**
+— sabendo, a cada etapa, para quem estão enviando, quanto e se a operação deu certo. Um
+fluxo de pagamento confuso ou sem confirmação clara gera insegurança (será que o Pix foi
+mesmo enviado? para a pessoa certa?) e erros difíceis de desfazer, já que Pix é
+irreversível.
+
+## 3. Solução proposta
+
+Um app mobile com Início (saldo, ações rápidas, resumo da fatura e últimas transações),
+Extrato (busca, filtros e gastos por categoria), um fluxo de Pix guiado em etapas com
+validação de chave/saldo/limite a cada passo e aviso de irreversibilidade, além de
+Cartões e Notificações como telas de consulta. **Usuário-alvo**: correntista de banco
+digital que usa o app no dia a dia para acompanhar a conta e fazer transferências via
+Pix pelo celular.
+
+## 4. Telas desenvolvidas
 
 Capturas reais do app rodando, em 390 × 844 @2x, geradas por script
 (`npm run screens`) — não são mockups.
@@ -46,6 +76,11 @@ Capturas reais do app rodando, em 390 × 844 @2x, geradas por script
 |:--:|:--:|:--:|:--:|
 | <img src="docs/screens/10-comprovante.png" width="185" alt="Comprovante do Pix com dados do pagador, do recebedor e código de autenticação"> | <img src="docs/screens/11-cartoes.png" width="185" alt="Tela de cartões com cartão ilustrado, fatura e ações como bloquear e ajustar limite"> | <img src="docs/screens/12-notificacoes.png" width="185" alt="Lista de notificações separadas entre lidas e não lidas"> | <img src="docs/screens/13-mais.png" width="185" alt="Perfil da titular e seções de conta, segurança e ajuda"> |
 | Documento com autenticação, compartilhar e salvar em PDF. | Alterna crédito/débito, bloqueio reversível, limite e cartão virtual. | Marcar tudo como lido e limpar, com estado vazio próprio. | Perfil, grupos de configuração e saída da conta. |
+
+## 5. Figma
+
+**[Wireframe mobile low-fidelity — techX](https://www.figma.com/make/NdDqbymWZZKF6Jm1O49iof/Wireframe-mobile-low-fidelity)**
+(link público, sem necessidade de login para visualizar).
 
 ---
 
