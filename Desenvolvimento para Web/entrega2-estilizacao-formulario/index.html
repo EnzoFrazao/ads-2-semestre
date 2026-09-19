@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog DevWeb</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="topo">
+    <h1>Blog DevWeb</h1>
+    <nav>
+      <a href="#topo">Início</a>
+      <a href="#artigos">Artigos</a>
+      <a href="#inscricao">Inscrição</a>
+    </nav>
+  </header>
+
+  <main id="artigos">
+    <article>
+      <h2>Por que aprender desenvolvimento web em 2026</h2>
+      <p>
+        Praticamente todo negócio precisa de presença na web, e quem entende como uma página
+        sai do servidor e chega até a tela do usuário consegue construir, consertar e melhorar
+        esses produtos. HTML, CSS e JavaScript continuam sendo a base de tudo isso, mesmo com
+        frameworks e ferramentas novas surgindo o tempo todo.
+      </p>
+      <img src="placeholder-artigo-1.svg" alt="Ilustração de um navegador exibindo linhas de código HTML">
+    </article>
+
+    <article>
+      <h2>HTML semântico: por que &lt;div&gt; não basta</h2>
+      <p>
+        Usar apenas &lt;div&gt; para tudo funciona visualmente, mas esconde o significado do
+        conteúdo. Tags como header, nav, main, article e footer descrevem o papel de cada parte
+        da página para leitores de tela, buscadores e para quem for ler o código depois — inclusive
+        você mesmo, alguns meses no futuro.
+      </p>
+      <img src="placeholder-artigo-2.svg" alt="Ilustração comparando uma sopa de divs com uma estrutura HTML semântica organizada">
+    </article>
+  </main>
+
+  <aside id="inscricao">
+    <form method="get" class="form-inscricao">
+      <fieldset>
+        <legend>Inscreva-se na newsletter</legend>
+
+        <div class="linha-dupla">
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" minlength="3" required>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="idade">Idade</label>
+          <input id="idade" name="idade" type="number" min="18" max="120" required>
+        </div>
+
+        <div class="campo">
+          <label for="assunto">Assunto de interesse</label>
+          <select id="assunto" name="assunto">
+            <option value="tecnologia">Tecnologia</option>
+            <option value="design">Design</option>
+            <option value="carreira">Carreira</option>
+          </select>
+        </div>
+
+        <label class="campo-checkbox">
+          <input type="checkbox" name="termos" required>
+          Aceito os termos de uso
+        </label>
+
+        <button type="submit">Inscrever-se</button>
+      </fieldset>
+    </form>
+  </aside>
+
+  <footer>
+    <p>&copy; 2026 Blog DevWeb. Projeto acadêmico — Desenvolvimento para Web.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320" role="img" aria-labelledby="titulo1">
+  <title id="titulo1">Navegador exibindo código HTML</title>
+  <rect width="600" height="320" fill="#1e293b"/>
+  <rect x="20" y="20" width="560" height="280" rx="8" fill="#0f172a"/>
+  <circle cx="45" cy="45" r="6" fill="#ef4444"/>
+  <circle cx="65" cy="45" r="6" fill="#eab308"/>
+  <circle cx="85" cy="45" r="6" fill="#22c55e"/>
+  <text x="45" y="100" font-family="monospace" font-size="18" fill="#38bdf8">&lt;header&gt;</text>
+  <text x="65" y="130" font-family="monospace" font-size="18" fill="#facc15">&lt;h1&gt;Blog DevWeb&lt;/h1&gt;</text>
+  <text x="45" y="160" font-family="monospace" font-size="18" fill="#38bdf8">&lt;/header&gt;</text>
+  <text x="45" y="200" font-family="monospace" font-size="18" fill="#38bdf8">&lt;main&gt;...&lt;/main&gt;</text>
+  <text x="45" y="240" font-family="monospace" font-size="18" fill="#4ade80">&lt;footer&gt;...&lt;/footer&gt;</text>
+</svg>
