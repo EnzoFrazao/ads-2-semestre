@@ -5,3 +5,7 @@
 # Lixo de sistema operacional
 .DS_Store
 Thumbs.db
+
+# Python
+__pycache__/
+*.pyc

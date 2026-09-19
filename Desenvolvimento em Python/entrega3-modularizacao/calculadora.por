@@ -55,8 +55,6 @@ programa
         escreva("10 - 4 = ", subtrair(10.0, 4.0), "\n")
         escreva("6 * 7 = ", multiplicar(6.0, 7.0), "\n")
         escreva("10 / 2 = ", dividir(10.0, 2.0), "\n")
-
-        // Este último cai no tratamento de divisão por zero.
         escreva("10 / 0 = ", dividir(10.0, 0.0), "\n")
     }
 }
