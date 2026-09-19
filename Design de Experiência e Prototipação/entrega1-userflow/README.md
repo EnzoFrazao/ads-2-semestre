@@ -1,7 +1,7 @@
 # Entrega 1 — User Flow (Semana 01)
 
 Entregável da Semana 01: User Flow do fluxo de **login e envio de Pix** no protótipo
-techX (ver [Entrega 2](../entrega2-nocode-doc/)), representando o caminho que a titular
+techX (ver [Entrega 2](../entrega2-prototipo/)), representando o caminho que a titular
 da conta percorre para transferir dinheiro.
 
 ## Link do arquivo (FigJam)
@@ -29,7 +29,7 @@ para referência, caso o link do Figma mude.
 ## Por que esse fluxo
 
 O techX (banco digital com Pix) é o desafio desta matéria (ver contexto completo na
-[Entrega 2](../entrega2-nocode-doc/README.md)). Entre as telas construídas em aula, o
+[Entrega 2](../entrega2-prototipo/README.md)). Entre as telas construídas em aula, o
 envio de Pix é o único fluxo de ponta a ponta com decisões reais (validação de chave,
 saldo, limite e resultado da transação), então foi o escolhido para representar como
 User Flow — as demais telas (extrato, cartões, notificações) são consultas sem
@@ -38,6 +38,6 @@ ramificação de decisão relevante para este diagrama.
 ## Como foi feito
 
 Gerado a partir da lógica de navegação já documentada no
-[mapa de navegação do protótipo](../entrega2-nocode-doc/README.md#mapa-de-navegação),
+[mapa de navegação do protótipo](../entrega2-prototipo/README.md#mapa-de-navegação),
 usando a ferramenta de diagramas do FigJam (formas padrão de User Flow: oval para
 início/fim, retângulo para etapa/ação, losango para decisão, setas para navegação).
