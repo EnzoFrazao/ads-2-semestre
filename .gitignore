@@ -2,6 +2,15 @@
 /coursera/
 /startup-supernova/
 
+# Resumos por materia (locais, nao versionados)
+/Desenvolvimento em Python/resumo.md
+/Desenvolvimento para Web/resumo.md
+/Design de Experiência e Prototipação/resumo.md
+/Interfaces dinâmicas e reativas/resumo.md
+
+# Docs internos da materia (locais, nao versionados)
+/Design de Experiência e Prototipação/docs/
+
 # Lixo de sistema operacional
 .DS_Store
 Thumbs.db
