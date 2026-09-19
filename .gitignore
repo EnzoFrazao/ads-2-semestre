@@ -1,0 +1,7 @@
+# Conteudo local apenas - nao versionado
+/coursera/
+/startup-supernova/
+
+# Lixo de sistema operacional
+.DS_Store
+Thumbs.db
