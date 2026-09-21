@@ -1,5 +1,3 @@
-"""Desafio 2 - Labirinto: percorre o labirinto de (0,0) até 'S' andando apenas para baixo e para a direita."""
-
 LIVRE = 0
 PAREDE = 1
 TRILHA = "."
@@ -15,14 +13,12 @@ labirinto = [
 
 
 def imprimir_labirinto(labirinto):
-    """Imprime o estado atual do labirinto, linha por linha."""
     for linha in labirinto:
         print(" ".join(str(celula) for celula in linha))
     print()
 
 
 def eh_valido(labirinto, linha, coluna):
-    """Verifica se a posição existe no labirinto e é caminho livre ou a saída."""
     dentro_das_linhas = 0 <= linha < len(labirinto)
     dentro_das_colunas = 0 <= coluna < len(labirinto[0])
     if not (dentro_das_linhas and dentro_das_colunas):
@@ -31,7 +27,6 @@ def eh_valido(labirinto, linha, coluna):
 
 
 def resolver_labirinto(labirinto, linha, coluna, caminho, passo=1):
-    """Tenta alcançar 'S' a partir de (linha, coluna), marcando a trilha a cada passo."""
     if labirinto[linha][coluna] == SAIDA:
         caminho.append((linha, coluna))
         return True
@@ -48,7 +43,6 @@ def resolver_labirinto(labirinto, linha, coluna, caminho, passo=1):
             if resolver_labirinto(labirinto, prox_linha, prox_coluna, caminho, passo + 1):
                 return True
 
-    # Sem saída por este caminho: desfaz a marcação e recua (backtracking)
     labirinto[linha][coluna] = valor_original
     caminho.pop()
     return False
