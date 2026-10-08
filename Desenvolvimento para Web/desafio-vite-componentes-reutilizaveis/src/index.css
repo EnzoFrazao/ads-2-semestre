@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f4f4f5;
+  color: #1f2933;
+}
+
+.cabecalho {
+  padding: 1.5rem;
+  background: #2563eb;
+  color: white;
+  text-align: center;
+}
+
+.cartoes {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+.cartao {
+  width: 120px;
+  height: 160px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartao-numero {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2563eb;
+}
