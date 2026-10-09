@@ -26,8 +26,19 @@ futuras, só o que já foi resolvido.
   segundos depois da página carregar e esconde a `<textarea>` real
   (`display: none`). Escrever direto na textarea via JS/`fill_input` não
   funciona (o TinyMCE sobrescreve ao sincronizar) — é preciso esperar
-  `tinymce.get('id_onlinetext_editor')` existir e usar `.setContent(html)` +
-  `.save()`.
+  `tinymce.activeEditor.id === 'id_onlinetext_editor'` (ser verdadeiro;
+  `tinymce.get('id_onlinetext_editor')` não funciona de forma confiável neste
+  Moodle — `tinymce.editors` não é um array populado, usar `tinymce.activeEditor`)
+  e então usar `.setContent(html)` + `.save()`.
+- Links das entregas no Moodle apontam para `tree/main/...` no GitHub, nunca
+  para a branch de feature — a branch pode ser excluída depois do merge e
+  quebraria o link; `main` é o destino estável.
+- As entregas reais (Tarefas/`mod/assign`) do semestre ficam no curso Moodle
+  "FRONTEND FAIXAS AZUIS" (id 2961, categoria TECHX), organizadas em blocos
+  "Entregáveis" por disciplina — não nos cursos oficiais "11 | GPADSM | ..."
+  (ids 3052-3055), que só têm materiais/fóruns e **não têm nenhuma Tarefa**
+  (`mod/assign/index.php?id=3052` retorna "Não há Tarefas neste curso"). Ao
+  procurar uma entrega no EAD, ir direto para `mod/assign/index.php?id=2961`.
 
 ## Última sessão (2026-10-08, Claude)
 - Resolvidas e commitadas as 7 entregas pendentes do EAD: Python semanas 4-6
@@ -35,5 +46,8 @@ futuras, só o que já foi resolvido.
   desafio Vite+React (`Desenvolvimento para Web/entrega{3,4,5}-*` e
   `desafio-vite-componentes-reutilizaveis/`).
 - Todas as 7 enviadas no Moodle (confirmado "Enviado para avaliação" em
-  cada uma) com link para este repositório na branch mergeada.
-- PR #2 aberto e já mergeado em `main`.
+  cada uma); PR #2 aberto e mergeado em `main`.
+- Auditoria de verificação: todas as 7 estavam "Enviado para avaliação", mas
+  o link de todas apontava para a branch de feature em vez de `main`.
+  Corrigido nas 7 (reenviadas com `tree/main/...`); status confirmado
+  novamente como "Enviado para avaliação" em todas após a correção.
