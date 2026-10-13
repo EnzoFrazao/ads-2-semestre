@@ -8,13 +8,17 @@ verdade sobre o que está pendente — este repositório não lista atividades
 futuras, só o que já foi resolvido.
 
 ## Pendências
-- [ ] Nenhuma pendência conhecida no momento (ver "Última sessão").
+- [ ] Conferir se o FigJam do user flow (entrega1-userflow) está com compartilhamento
+  "Qualquer pessoa com o link pode visualizar". A nota de pendência saiu do README público
+  em 2026-10-13 e o lembrete ficou aqui.
 - [ ] A disciplina "Desenvolvimento de Interfaces Dinâmicas e Reativas" já
   aparece no EAD (curso id 3055 / seção id 12826) mas ainda não tem nenhum
   entregável publicado — ainda não existe pasta pra ela aqui. Verificar no
   EAD quando a primeira atividade for aberta.
 
 ## Decisões importantes
+- O README da **raiz** é um índice voltado para recrutadores, que linka as entregas. Ele não
+  contradiz a regra abaixo, que vale para as pastas de entrega.
 - Entregas de Python e Web não levam README por padrão (removido de
   propósito no histórico do repo) — só ganham README quando o enunciado da
   atividade exige explicitamente (ex.: entregas que pedem "repositório no
@@ -40,14 +44,9 @@ futuras, só o que já foi resolvido.
   (`mod/assign/index.php?id=3052` retorna "Não há Tarefas neste curso"). Ao
   procurar uma entrega no EAD, ir direto para `mod/assign/index.php?id=2961`.
 
-## Última sessão (2026-10-08, Claude)
-- Resolvidas e commitadas as 7 entregas pendentes do EAD: Python semanas 4-6
-  (`Desenvolvimento em Python/entrega{4,5,6}-*`) e Web semanas 3-5 +
-  desafio Vite+React (`Desenvolvimento para Web/entrega{3,4,5}-*` e
-  `desafio-vite-componentes-reutilizaveis/`).
-- Todas as 7 enviadas no Moodle (confirmado "Enviado para avaliação" em
-  cada uma); PR #2 aberto e mergeado em `main`.
-- Auditoria de verificação: todas as 7 estavam "Enviado para avaliação", mas
-  o link de todas apontava para a branch de feature em vez de `main`.
-  Corrigido nas 7 (reenviadas com `tree/main/...`); status confirmado
-  novamente como "Enviado para avaliação" em todas após a correção.
+## Última sessão (2026-10-13, Claude)
+- Criado e publicado o `README.md` da raiz (índice para recrutadores): destaques, uma tabela por
+  disciplina e como rodar.
+- Tirada do README da `entrega1-userflow` a nota interna "Pendência" de compartilhamento do Figma
+  (o lembrete foi para as Pendências).
+- Sessão anterior (2026-10-08): 7 entregas do EAD resolvidas e enviadas, com links em `tree/main`.
