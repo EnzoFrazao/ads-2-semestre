@@ -8,11 +8,6 @@ da conta percorre para transferir dinheiro.
 
 **[User Flow — Enviar Pix (techX)](https://www.figma.com/board/PWHQcrea0yJjOVQd6oNa6l)**
 
-> ⚠️ **Pendência**: o arquivo foi criado via API e por padrão fica com acesso restrito à
-> minha conta. Preciso abrir o link logado no Figma e mudar o compartilhamento para
-> **"Qualquer pessoa com o link pode visualizar"** antes de entregar — nenhuma ferramenta
-> automatizada tem permissão para alterar essa configuração.
-
 Uma cópia estática do diagrama gerado fica em [`docs/user-flow-pix.svg`](docs/user-flow-pix.svg)
 para referência, caso o link do Figma mude.
 
