@@ -18,3 +18,12 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Handoff entre agentes (local, nao versionado)
+/docs/
+
+# Material de briefing do Pizza Hut (local, nao versionado)
+/pizza-hut/Briefing_Desafio_Plataforma_BI_Pizzarias_HUT_res.md
+/pizza-hut/Plataforma de BI Pizza Hut - Contextualização do problema.pdf
+/pizza-hut/pizza hut.txt
+/pizza-hut/resumo.md
