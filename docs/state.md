@@ -16,7 +16,25 @@ futuras, só o que já foi resolvido.
   entregável publicado — ainda não existe pasta pra ela aqui. Verificar no
   EAD quando a primeira atividade for aberta.
 
+- [ ] Conferir no GitHub que o workflow `CI/CD - Painel de deploy` ficou verde e que o Pages
+  (`atividade-ci-cd`) está no ar; depois conferir o envio no EAD (tarefa id 25599, vence 2026-11-19).
+- [ ] Protótipo do painel: Chef Hut é simulado (`src/chef/brain.js`); trocar por API real é o
+  próximo passo se o projeto avançar. Dados 100% fictícios (`src/data/`).
+
 ## Decisões importantes
+- `atividade-ci-cd/`: app estático (sem dependências) + testes com `node --test`; o workflow fica na
+  **raiz** (`.github/workflows/ci-cd.yml`, exigência do GitHub) e usa `working-directory`. Deploy no
+  GitHub Pages via `actions/deploy-pages`. A entrega no EAD é um print (nome do GitHub + teste verde).
+- Armadilha: `fs.cpSync` derruba o Node 22.23 no Windows (exit 0xC0000409, sem mensagem); o
+  `scripts/build.mjs` copia arquivo a arquivo por isso. Em `bash` do Claude Code o `node` não está no
+  PATH — rodar `npm`/`node` pelo PowerShell.
+- Só o código de `pizza-hut/dashboard-prototipo/` é versionado; briefing, PDF, `resumo.md` e
+  `pizza hut.txt` ficam locais de propósito (material pessoal).
+- `pizza-hut/dashboard-prototipo/`: Vite + React + ECharts + Framer Motion, rodando local
+  (`npm install && npm run dev`, porta 5173). Períodos são múltiplos de 7 dias (7d, 28d, 91d, 364d)
+  para a variação contra o período anterior não ser distorcida por dias da semana.
+- Armadilha de teste: com o painel do navegador embutido oculto, `requestAnimationFrame` não roda e
+  as animações ficam presas em opacidade 0; verificar com o painel visível.
 - O README da **raiz** é um índice voltado para recrutadores, que linka as entregas. Ele não
   contradiz a regra abaixo, que vale para as pastas de entrega.
 - Entregas de Python e Web não levam README por padrão (removido de
@@ -44,7 +62,17 @@ futuras, só o que já foi resolvido.
   (`mod/assign/index.php?id=3052` retorna "Não há Tarefas neste curso"). Ao
   procurar uma entrega no EAD, ir direto para `mod/assign/index.php?id=2961`.
 
-## Última sessão (2026-10-13, Claude)
+## Última sessão (2026-11-16, Claude)
+- Criada a `atividade-ci-cd/` (painel de deploy + 5 testes) e o workflow de CI/CD; testes e build ok
+  localmente. Commitado junto o protótipo `pizza-hut/dashboard-prototipo/`.
+
+## Sessão anterior (2026-11-11, Claude)
+- Criado `pizza-hut/dashboard-prototipo/`: protótipo web do painel de BI (8 abas, tema claro/escuro,
+  assistente Chef Hut simulado, modo apresentação, demo de carga de planilha). README próprio dentro.
+- Verificado no navegador: todas as abas em escuro, Visão geral em claro, mobile 375 px sem rolagem
+  horizontal, chat, carga de exemplo, modo apresentação; `npm run build` ok.
+
+## Sessão de 2026-10-13 (Claude)
 - Criado e publicado o `README.md` da raiz (índice para recrutadores): destaques, uma tabela por
   disciplina e como rodar.
 - Tirada do README da `entrega1-userflow` a nota interna "Pendência" de compartilhamento do Figma
