@@ -1,0 +1,47 @@
+name: CI/CD - Painel de deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "atividade-ci-cd/**"
+      - ".github/workflows/ci-cd.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Testes
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: atividade-ci-cd
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: atividade-ci-cd/dist
+
+  deploy:
+    name: Deploy (GitHub Pages)
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de deploy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Painel de deploy</h1>
+    <p class="sub">Esta página foi publicada pelo pipeline de CI/CD do GitHub Actions.</p>
+
+    <section class="grid" aria-label="Dados do build">
+      <div class="card"><span>Commit</span><strong id="sha">…</strong></div>
+      <div class="card"><span>Branch</span><strong id="branch">…</strong></div>
+      <div class="card"><span>Build em</span><strong id="date">…</strong></div>
+      <div class="card"><span>Sucesso recente</span><strong id="rate">…</strong></div>
+    </section>
+
+    <h2>Últimas execuções do pipeline</h2>
+    <ul id="runs"><li>Carregando…</li></ul>
+
+    <p class="foot">Repositório: <a id="repo" href="#">…</a></p>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
