@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "atividade-ci-cd/**"
+      - "pizza-hut/**"
       - ".github/workflows/ci-cd.yml"
   workflow_dispatch:
 
@@ -25,6 +26,15 @@ jobs:
           node-version: 22
       - run: npm test
       - run: npm run build
+      # O protótipo do painel de BI é publicado na subpasta /pizza-hut/ do mesmo site.
+      - name: Build do protótipo Pizza Hut
+        working-directory: pizza-hut
+        run: |
+          npm ci
+          npm run build -- --base=/ads-2-semestre/pizza-hut/
+      - name: Junta o protótipo ao site
+        working-directory: .
+        run: cp -r pizza-hut/dist atividade-ci-cd/dist/pizza-hut
       - uses: actions/upload-pages-artifact@v3
         with:
           path: atividade-ci-cd/dist
