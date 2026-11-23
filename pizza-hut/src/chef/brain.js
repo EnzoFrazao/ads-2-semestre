@@ -4,7 +4,7 @@ import { SELO, avaliarSelo, sinais } from '../data/alertas'
 import { conferencia } from '../data/estoque'
 import { previsaoPedidos } from '../data/previsao'
 import { DESP_CAUSAS, DESP_TIPOS, SABORES } from '../data/custos'
-import { EQUIPE } from '../data/equipe'
+import { ETAPAS, maiorGargalo, mediaEtapas, ocorrencias } from '../data/kds'
 import { semAcento, brlCent, brlCompacto, pct, dec1, dec2, int, min as fmtMin, sinal } from '../data/format'
 
 // Cérebro simulado do Chef Hut. Tudo é calculado a partir dos mesmos dados do painel, então os
@@ -100,9 +100,23 @@ function respostaEntrega(per, label) {
   m.forEach((linha, d) => linha.forEach((v, hh) => v > max.v && (max = { v, d, h: hh })))
   const pico = DAILY.filter((x) => x.loja === 'r' && x.date >= addDays(END, -27) && x.dow >= 4)
   const abaixo = pico.filter((x) => x.motoboys < MIN_MOTOBOYS).length
+  const folga = (v) => (v > META_ENTREGA ? `${dec1(v - META_ENTREGA)} min acima da meta` : 'dentro da meta')
+  const motoboys = abaixo ? ` Nas últimas 4 semanas, ${abaixo} dias de pico tiveram menos de ${MIN_MOTOBOYS} motoboys, o que costuma explicar parte dos atrasos.` : ''
   return {
-    texto: `O tempo médio de entrega nos últimos ${label} é ${fmtMin(r.tempo)} na Renascença e ${fmtMin(h.tempo)} em Holandeses, para uma meta de ${META_ENTREGA} min. Na Renascença, ${pct(r.dentro, 0)} dos pedidos chegam no prazo. O pior horário é ${NOME_DIA[max.d]} às ${HORAS[max.h]}, com ${max.v} min em média.${abaixo ? ` Nas últimas 4 semanas, ${abaixo} dias de pico tiveram menos de ${MIN_MOTOBOYS} motoboys, o que costuma explicar parte dos atrasos.` : ''}`,
+    texto: `Do pedido cair na central até o motoboy sair, o tempo nos últimos ${label} é ${fmtMin(h.tempo)} em Holandeses (${folga(h.tempo)}) e ${fmtMin(r.tempo)} na Renascença (${folga(r.tempo)}), para uma meta de ${META_ENTREGA} min. Só ${pct(r.dentro, 0)} dos pedidos da Renascença saem nesse prazo. O pior horário lá é ${NOME_DIA[max.d]} às ${HORAS[max.h]}, com ${max.v} min em média.${motoboys} O tempo até o cliente só existe para o motoboy do iFood (${pct(r.coberturaCliente, 0)} dos pedidos); a cooperativa não informa.`,
     acao: { tab: 'entrega', label: 'Ver entregas', loja: 'r' },
+  }
+}
+
+function respostaProducao(per, label) {
+  const med = mediaEtapas(selecionar('h', per))
+  const g = maiorGargalo(med)
+  const linhas = ETAPAS.map((e) => `${e.nome.toLowerCase()} ${dec1(med[e.id])} min (meta ${dec1(e.meta)})`).join(', ')
+  const ev = ocorrencias('h', 28)[0]
+  const extra = ev ? ` Atenção: houve ${ev.dias} dias fora do padrão, com pico de ${Math.round(ev.pico)} min. Antes de cobrar a equipe, vale checar o equipamento do KDS.` : ''
+  return {
+    texto: `Nos últimos ${label}, o pedido leva ${dec1(med.total)} min até o despacho nos Holandeses, para meta de ${META_ENTREGA} min. Por etapa: ${linhas}. A etapa que mais passa da meta é ${g.nome.toLowerCase()} (${dec1(g.excesso)} min). O forno é praticamente fixo, então o ganho está no resto.${extra} A análise é por etapa, não por pessoa, e a Renascença ainda não tem KDS.`,
+    acao: { tab: 'producao', label: 'Ver produção' },
   }
 }
 
@@ -157,21 +171,21 @@ function respostaSabores() {
 }
 
 function respostaEquipe() {
-  const pend = EQUIPE.filter((p) => p.proposta).length
   return {
-    texto: `A aba Equipe compara pessoas só dentro da mesma função, considerando volume e turno. Hoje há ${pend} propostas de bonificação aguardando validação do gestor. Nada é concedido automaticamente, e uma métrica isolada não resume o desempenho de ninguém.`,
-    acao: { tab: 'equipe', label: 'Ver equipe' },
+    texto: 'O painel analisa o desempenho por etapa da produção (montagem, forno, corte e despacho) e por dia, não por pessoa. Assim dá para ver onde o pedido espera sem expor um funcionário só por causa de um número isolado.',
+    acao: { tab: 'producao', label: 'Ver produção' },
   }
 }
 
 const INTENCOES = [
-  { teste: /\b(oi|ola|bom dia|boa tarde|boa noite|e ai|opa)\b/, resp: () => ({ texto: 'Oi! Pode perguntar sobre vendas, entrega, CMV, desperdício, massas, estoque, selo SUPER ou equipe.', acao: null }) },
-  { teste: /ajuda|o que (voce|vc) (faz|sabe)|como funciona|quem e voce/, resp: () => ({ texto: 'Sou o Chef Hut, assistente do painel. Respondo com os números das duas lojas: vendas, entrega, CMV, desperdício, massas, estoque, selo SUPER e equipe. Minhas respostas são simuladas neste protótipo.', acao: null }) },
+  { teste: /\b(oi|ola|bom dia|boa tarde|boa noite|e ai|opa)\b/, resp: () => ({ texto: 'Oi! Pode perguntar sobre vendas, entrega, produção, CMV, desperdício, massas, estoque ou selo SUPER.', acao: null }) },
+  { teste: /ajuda|o que (voce|vc) (faz|sabe)|como funciona|quem e voce/, resp: () => ({ texto: 'Sou o Chef Hut, assistente do painel. Respondo com os números das duas lojas: vendas, entrega, CMV, desperdício, massas, estoque, selo SUPER e produção. Minhas respostas são simuladas neste protótipo.', acao: null }) },
   { teste: /massa|amanha|previs|quantas|proxim/, resp: (q) => respostaMassas(q) },
   { teste: /estoque|diverg|furto|roubo|falta|contagem|sumi/, resp: () => respostaEstoque() },
   { teste: /super|selo|ifood|nota|cancel|acordo/, resp: (_, c) => respostaSelo(c.periodo) },
   { teste: /cmv|custo/, resp: (_, c) => respostaCmv(c.periodo, c.label) },
   { teste: /desperd|perda|jogad|descart/, resp: (_, c) => respostaDesperdicio(c.periodo, c.label) },
+  { teste: /producao|etapa|forno|montagem|kds|gargalo|cozinha|despacho|make/, resp: (_, c) => respostaProducao(c.periodo, c.label) },
   { teste: /entrega|atras|tempo|motoboy|entregador|demor/, resp: (_, c) => respostaEntrega(c.periodo, c.label) },
   { teste: /hoje|resolver|prioridad|atencao|alerta|sinal|problema|urgente/, resp: (_, c) => respostaHoje(c.loja) },
   { teste: /equipe|funcionari|bonific|desempenho|pessoal/, resp: () => respostaEquipe() },
@@ -180,7 +194,7 @@ const INTENCOES = [
 ]
 
 const FALLBACK = {
-  texto: 'Ainda não sei responder isso. Posso falar de vendas, entrega, CMV, desperdício, massas, estoque, selo SUPER e equipe. Tente, por exemplo, "como está o CMV?".',
+  texto: 'Ainda não sei responder isso. Posso falar de vendas, entrega, produção, CMV, desperdício, massas, estoque e selo SUPER. Tente, por exemplo, "como está o CMV?".',
   acao: null,
 }
 

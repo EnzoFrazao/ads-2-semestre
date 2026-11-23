@@ -34,7 +34,7 @@ export default function VisaoGeral() {
         <KpiCard i={1} icone={ShoppingBag} rotulo="Pedidos" valor={atual.pedidos} formato={(v) => int(v)} delta={variacao(atual.pedidos, anterior.pedidos)} nota={`nos últimos ${label}`} />
         <KpiCard i={2} icone={Percent} rotulo="Ticket médio" valor={atual.ticket} formato={(v) => brlCent(v)} delta={variacao(atual.ticket, anterior.ticket)} />
         <KpiCard i={3} icone={Percent} rotulo="CMV" valor={atual.cmv} formato={(v) => pct(v)} delta={variacao(atual.cmv, anterior.cmv)} inverso status={statusCmv} nota="faixa de 28% a 32%" />
-        <KpiCard i={4} icone={Timer} rotulo="Tempo médio de entrega" valor={atual.tempo} formato={(v) => min(v)} delta={variacao(atual.tempo, anterior.tempo)} inverso nota={`${pct(atual.dentro, 0)} dentro da meta`} />
+        <KpiCard i={4} icone={Timer} rotulo="Pedido até despacho" valor={atual.tempo} formato={(v) => min(v)} delta={variacao(atual.tempo, anterior.tempo)} inverso nota={`meta de 15 min, ${pct(atual.dentro, 0)} dentro`} />
         <KpiCard i={5} icone={Trash2} rotulo="Desperdício" valor={atual.desperdicio} formato={(v) => brlCompacto(v)} delta={variacao(atual.desperdicio, anterior.desperdicio)} inverso nota={`${pct(atual.despPct, 2)} do faturamento`} />
       </div>
 
@@ -65,7 +65,7 @@ export default function VisaoGeral() {
               { rotulo: 'Faturamento', h: h.bruto, r: r.bruto, fmt: brlCompacto, melhor: 'maior' },
               { rotulo: 'Pedidos', h: h.pedidos, r: r.pedidos, fmt: int, melhor: 'maior' },
               { rotulo: 'Ticket médio', h: h.ticket, r: r.ticket, fmt: brlCent, melhor: 'maior' },
-              { rotulo: 'Tempo de entrega', h: h.tempo, r: r.tempo, fmt: min, melhor: 'menor' },
+              { rotulo: 'Pedido até despacho', h: h.tempo, r: r.tempo, fmt: min, melhor: 'menor' },
               { rotulo: 'CMV', h: h.cmv, r: r.cmv, fmt: pct, melhor: 'menor' },
               { rotulo: 'Desperdício', h: h.despPct, r: r.despPct, fmt: (v) => pct(v, 2), melhor: 'menor' },
             ]}
