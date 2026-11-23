@@ -9,7 +9,7 @@ export const TABS = [
   { id: 'desperdicio', label: 'Desperdício e CMV', icone: 'Trash2' },
   { id: 'vendas', label: 'Vendas e mix', icone: 'Pizza' },
   { id: 'estoque', label: 'Estoque e previsões', icone: 'Boxes' },
-  { id: 'equipe', label: 'Equipe', icone: 'Users' },
+  { id: 'producao', label: 'Produção (KDS)', icone: 'ChefHat' },
   { id: 'dados', label: 'Dados e carga', icone: 'DatabaseZap' },
 ]
 

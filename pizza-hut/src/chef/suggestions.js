@@ -5,6 +5,7 @@ export const SUGESTOES = [
   'Por que o CMV subiu?',
   'Quantas massas para sábado?',
   'Onde há atraso na entrega?',
+  'Qual etapa da produção é o gargalo?',
   'O que preciso resolver hoje?',
   'Há divergências no estoque?',
 ]

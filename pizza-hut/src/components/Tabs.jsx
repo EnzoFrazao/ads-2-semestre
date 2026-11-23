@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Bike, Boxes, DatabaseZap, LayoutDashboard, Pizza, Trash2, Users, Wallet } from 'lucide-react'
+import { Bike, Boxes, ChefHat, DatabaseZap, LayoutDashboard, Pizza, Trash2, Wallet } from 'lucide-react'
 import { TABS, useDash } from '../state/DashContext'
 
-const ICONES = { LayoutDashboard, Bike, Wallet, Trash2, Pizza, Boxes, Users, DatabaseZap }
+const ICONES = { LayoutDashboard, Bike, Wallet, Trash2, Pizza, Boxes, ChefHat, DatabaseZap }
 
 export default function Tabs() {
   const { tab, setTab } = useDash()

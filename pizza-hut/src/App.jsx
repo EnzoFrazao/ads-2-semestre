@@ -12,7 +12,7 @@ import Faturamento from './sections/Faturamento'
 import DesperdicioCmv from './sections/DesperdicioCmv'
 import VendasMix from './sections/VendasMix'
 import EstoquePrevisoes from './sections/EstoquePrevisoes'
-import Equipe from './sections/Equipe'
+import ProducaoKds from './sections/ProducaoKds'
 import DadosCarga from './sections/DadosCarga'
 
 const SECOES = {
@@ -22,7 +22,7 @@ const SECOES = {
   desperdicio: DesperdicioCmv,
   vendas: VendasMix,
   estoque: EstoquePrevisoes,
-  equipe: Equipe,
+  producao: ProducaoKds,
   dados: DadosCarga,
 }
 

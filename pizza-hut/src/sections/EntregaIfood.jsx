@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
-import { Award, Bike, Clock3, Hourglass, Timer, TriangleAlert } from 'lucide-react'
+import { Award, Bike, Clock3, Hourglass, MapPinned, Timer, TriangleAlert } from 'lucide-react'
 import { useRecorte } from '../state/DashContext'
 import { useTheme } from '../theme/ThemeProvider'
 import { mediaPond, serie, variacao } from '../data/metrics'
 import { DAILY, DIAS, HORAS, META_ENTREGA, MIN_MOTOBOYS, mapaTempo } from '../data/daily'
 import { SELO, avaliarSelo, nivelSuper } from '../data/alertas'
 import { dataCurta, dec1, dec2, min, pct } from '../data/format'
+import { nivelDespacho } from '../data/kds'
 import Card, { Status } from '../components/Card'
 import KpiCard from '../components/KpiCard'
 import Chart, { eixoCat, eixoVal, grade, legenda, lojasVisiveis, serieLinha } from '../components/Chart'
@@ -89,42 +90,50 @@ export default function EntregaIfood() {
         </span>
       </div>
 
+      <div className="banner banner-info">
+        <MapPinned size={18} aria-hidden="true" />
+        <span>
+          O tempo desta aba é do <strong>pedido cair na central até o motoboy sair</strong> (meta de {META_ENTREGA} min). O tempo <strong>até o cliente</strong> só existe para o motoboy do iFood ({pct(atual.coberturaCliente, 0)} dos pedidos); a cooperativa não informa o que acontece depois que sai da loja.
+        </span>
+      </div>
+
       <div className="kpis">
-        <KpiCard i={0} icone={Timer} rotulo="Tempo médio" valor={atual.tempo} formato={(v) => min(v)} delta={variacao(atual.tempo, anterior.tempo)} inverso nota={`meta de ${META_ENTREGA} min`} />
-        <KpiCard i={1} icone={Clock3} rotulo="Tempo mediano" valor={atual.tempoMediana} formato={(v) => min(v)} nota="mediana dos dias" />
-        <KpiCard i={2} icone={Award} rotulo="Dentro da meta" valor={atual.dentro} formato={(v) => pct(v, 0)} delta={variacao(atual.dentro, anterior.dentro)} nota="pedidos entregues no prazo" />
-        <KpiCard i={3} icone={Hourglass} rotulo="Atrasos" valor={atual.atrasos} formato={(v) => pct(v, 0)} delta={variacao(atual.atrasos, anterior.atrasos)} inverso nota={`nos últimos ${label}`} />
-        <KpiCard i={4} icone={Bike} rotulo="Motoboys (sex a dom)" valor={mediaMoto} formato={(v) => dec1(v)} status={diasAbaixo ? { nivel: diasAbaixo >= 3 ? 'bad' : 'warn', texto: `${diasAbaixo} dias abaixo de ${MIN_MOTOBOYS}` } : { nivel: 'ok', texto: 'Escala completa' }} nota="Renascença, 4 semanas" />
+        <KpiCard i={0} icone={Timer} rotulo="Pedido até despacho" valor={atual.tempo} formato={(v) => min(v)} delta={variacao(atual.tempo, anterior.tempo)} inverso status={{ nivel: nivelDespacho(atual.tempo), texto: nivelDespacho(atual.tempo) === 'ok' ? 'Na meta' : 'Acima da meta' }} nota={`meta de ${META_ENTREGA} min`} />
+        <KpiCard i={1} icone={Clock3} rotulo="Mediana dos dias" valor={atual.tempoMediana} formato={(v) => min(v)} nota="dia típico, sem picos" />
+        <KpiCard i={2} icone={Award} rotulo="Dentro da meta" valor={atual.dentro} formato={(v) => pct(v, 0)} delta={variacao(atual.dentro, anterior.dentro)} nota={`despachados em até ${META_ENTREGA} min`} />
+        <KpiCard i={3} icone={Hourglass} rotulo="Acima da meta" valor={atual.atrasos} formato={(v) => pct(v, 0)} delta={variacao(atual.atrasos, anterior.atrasos)} inverso nota={`nos últimos ${label}`} />
+        <KpiCard i={4} icone={MapPinned} rotulo="Com tempo até o cliente" valor={atual.coberturaCliente} formato={(v) => pct(v, 0)} nota="só motoboy iFood" />
+        <KpiCard i={5} icone={Bike} rotulo="Motoboys (sex a dom)" valor={mediaMoto} formato={(v) => dec1(v)} status={diasAbaixo ? { nivel: diasAbaixo >= 3 ? 'bad' : 'warn', texto: `${diasAbaixo} dias abaixo de ${MIN_MOTOBOYS}` } : { nivel: 'ok', texto: 'Escala completa' }} nota="Renascença, 4 semanas" />
       </div>
 
       <div className="grade g-3">
-        <Card i={1} title="Tempo médio" sub={`Meta de ${META_ENTREGA} min`}>
+        <Card i={1} title="Pedido até despacho" sub={`Meta de ${META_ENTREGA} min`}>
           <Chart
-            label={`Medidor do tempo médio de entrega: ${min(atual.tempo)}`}
+            label={`Medidor do tempo até o despacho: ${min(atual.tempo)}`}
             height={210}
-            build={() => medidor(c, { valor: Number(atual.tempo.toFixed(1)), min: 20, max: 60, faixas: [[0.5, c.ok], [0.7, c.warn], [1, c.bad]], fmt: (v) => `${Math.round(v)} min` })}
+            build={() => medidor(c, { valor: Number(atual.tempo.toFixed(1)), min: 10, max: 30, faixas: [[0.25, c.ok], [0.5, c.warn], [1, c.bad]], fmt: (v) => `${Math.round(v)} min` })}
           />
         </Card>
-        <Card i={2} title="Dentro da meta" sub="Pedidos entregues em até 40 min">
+        <Card i={2} title="Dentro da meta" sub={`Pedidos despachados em até ${META_ENTREGA} min`}>
           <Chart
             label={`Medidor de pedidos dentro da meta: ${pct(atual.dentro, 0)}`}
             height={210}
-            build={() => medidor(c, { valor: Number(atual.dentro.toFixed(1)), min: 50, max: 100, faixas: [[0.6, c.bad], [0.8, c.warn], [1, c.ok]], fmt: (v) => `${Math.round(v)}%` })}
+            build={() => medidor(c, { valor: Number(atual.dentro.toFixed(1)), min: 0, max: 100, faixas: [[0.4, c.bad], [0.7, c.warn], [1, c.ok]], fmt: (v) => `${Math.round(v)}%` })}
           />
         </Card>
-        <Card i={3} title={`Tempo por dia e horário`} sub={`${lojaMapa === 'r' ? 'Renascença' : 'Holandeses'}, média de 90 dias, em minutos`}>
+        <Card i={3} title="Despacho por dia e horário" sub={`${lojaMapa === 'r' ? 'Renascença' : 'Holandeses'}, média de 90 dias, em minutos`}>
           <Chart
             label="Mapa de calor do tempo de entrega por dia da semana e horário"
             height={210}
             build={() => {
               const dados = []
-              mapa.forEach((linha, y) => linha.forEach((v, x) => dados.push({ value: [x, y, v], label: { color: v >= 42 ? '#fff' : c.text } })))
+              mapa.forEach((linha, y) => linha.forEach((v, x) => dados.push({ value: [x, y, v], label: { color: v >= 26 ? '#fff' : c.text } })))
               return {
                 grid: { left: 36, right: 6, top: 4, bottom: 22 },
                 tooltip: { formatter: (p) => `${DIAS[p.value[1]]} às ${HORAS[p.value[0]]}: <b>${p.value[2]} min</b>` },
                 xAxis: { type: 'category', data: HORAS, splitArea: { show: false }, axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: c.muted } },
                 yAxis: { type: 'category', data: DIAS, inverse: true, axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: c.muted } },
-                visualMap: { show: false, min: 26, max: 54, inRange: { color: c.ramp } },
+                visualMap: { show: false, min: 14, max: 34, inRange: { color: c.ramp } },
                 series: [{ type: 'heatmap', data: dados, label: { show: true, fontSize: 11 }, itemStyle: { borderColor: c.card, borderWidth: 2, borderRadius: 4 } }],
               }
             }}
@@ -133,16 +142,16 @@ export default function EntregaIfood() {
       </div>
 
       <div className="grade g-2e">
-        <Card i={4} title="Tempo médio de entrega" sub="Linha tracejada vermelha: meta">
+        <Card i={4} title="Pedido até despacho" sub="Linha tracejada vermelha: meta">
           <Chart
-            label="Linha do tempo médio de entrega por loja com a meta de 40 minutos"
+            label="Linha do tempo até o despacho por loja com a meta de 15 minutos"
             height={270}
             build={() => ({
               grid: grade(),
               legend: legenda(c),
               tooltip: { trigger: 'axis', valueFormatter: (v) => (v == null ? '-' : min(v)) },
               xAxis: eixoCat(c, tempoSerie.labels, { boundaryGap: false, axisLabel: { color: c.muted, fontSize: 12, hideOverlap: true } }),
-              yAxis: eixoVal(c, (v) => `${v}`, { min: 20, max: 60 }),
+              yAxis: eixoVal(c, (v) => `${v}`, { min: 10 }),
               series: vis.map((l, idx) =>
                 serieLinha(c, l, tempoSerie[l].map((v) => (v == null ? null : Number(v.toFixed(1)))), {
                   areaStyle: undefined,

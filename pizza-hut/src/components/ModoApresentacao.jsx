@@ -4,8 +4,9 @@ import { Pause, Play, SkipForward, X } from 'lucide-react'
 import { TABS, useDash } from '../state/DashContext'
 
 const SEGUNDOS = 12
-// Na demonstração, a aba de entrega mostra só a Renascença (delivery); as demais mostram as duas lojas.
-const LOJA_POR_TAB = { entrega: 'r' }
+// Na demonstração, a aba de entrega mostra só a Renascença (delivery) e a de produção só os Holandeses (único com KDS);
+// as demais mostram as duas lojas.
+const LOJA_POR_TAB = { entrega: 'r', producao: 'h' }
 
 export default function ModoApresentacao() {
   const { presenting, setPresenting, tab, setTab, setLoja } = useDash()

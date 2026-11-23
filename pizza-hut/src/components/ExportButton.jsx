@@ -11,8 +11,12 @@ const CAMPOS = [
   ['descontos', 'Descontos (R$)'],
   ['taxas', 'Taxas e comissões (R$)'],
   ['liquido', 'Líquido (R$)'],
-  ['tempo', 'Tempo médio de entrega (min)'],
-  ['dentro', 'Dentro da meta (%)'],
+  ['tempo', 'Pedido até despacho (min)'],
+  ['montagem', 'Montagem (min)'],
+  ['forno', 'Forno (min)'],
+  ['porta', 'Corte e caixa (min)'],
+  ['despacho', 'Despacho (min)'],
+  ['dentro', 'Despachado em até 15 min (%)'],
   ['desperdicio', 'Desperdício (R$)'],
   ['cmv', 'CMV (%)'],
   ['nota', 'Nota iFood'],
@@ -21,6 +25,7 @@ const CAMPOS = [
 ]
 
 const celula = (k, v) => {
+  if (v == null) return '' // sem KDS (Renascença)
   if (k === 'loja') return LOJAS[v].nome
   if (typeof v === 'number') return v.toFixed(2).replace('.', ',')
   return v

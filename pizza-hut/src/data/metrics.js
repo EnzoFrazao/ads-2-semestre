@@ -37,6 +37,7 @@ export function somar(rows) {
     liquido: 0,
     desperdicio: 0,
     cmvValor: 0,
+    motoIfood: 0,
     canal: { salao: 0, ifood: 0, balcao: 0, app: 0 },
   }
   let tempoW = 0
@@ -52,6 +53,7 @@ export function somar(rows) {
     s.liquido += r.liquido
     s.desperdicio += r.desperdicio
     s.cmvValor += r.cmvValor
+    s.motoIfood += r.motoIfood
     for (const k of Object.keys(s.canal)) s.canal[k] += r.canal[k]
     tempoW += r.tempo * r.pedidos
     dentroW += r.dentro * r.pedidos
@@ -66,6 +68,7 @@ export function somar(rows) {
   s.tempoMediana = mediana(rows.map((r) => r.tempo))
   s.dentro = dentroW / p
   s.atrasos = 100 - s.dentro
+  s.coberturaCliente = (s.motoIfood / p) * 100 // pedidos com tempo até o cliente (só motoboy iFood)
   s.nota = notaW / p
   s.cancel = cancelW / p
   s.acordo = acordoW / p

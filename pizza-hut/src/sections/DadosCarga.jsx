@@ -9,7 +9,7 @@ const ETAPAS = ['Lendo o arquivo', 'Conferindo as colunas', 'Validando tipos e d
 
 const RESULTADO = [
   { nivel: 'ok', texto: 'Linhas lidas', valor: 1842 },
-  { nivel: 'ok', texto: 'Colunas esperadas encontradas', valor: '14 de 14' },
+  { nivel: 'ok', texto: 'Colunas esperadas encontradas', valor: '18 de 18' },
   { nivel: 'warn', texto: 'Datas fora do padrão (corrigidas)', valor: 3 },
   { nivel: 'warn', texto: 'Linhas duplicadas (removidas)', valor: 12 },
   { nivel: 'warn', texto: 'Campos vazios (para revisar)', valor: 5 },
@@ -76,12 +76,12 @@ export default function DadosCarga() {
           <p className="fonte-forte">09/11/2026, 09:12</p>
           <p className="muted">Dados até 48 horas anteriores</p>
         </Card>
-        <Card i={2} title="KDS (produção)" right={<Pill tom="gray">Planejado</Pill>}>
-          <p className="fonte-linha">Sistema integrado de produção da franquia.</p>
+        <Card i={2} title="KDS (produção)" right={<Pill tom="gray">Só Holandeses</Pill>}>
+          <p className="fonte-linha">Tempo de cada etapa: montagem, forno, corte e despacho.</p>
           <p className="fonte-forte">
-            <Radio size={20} aria-hidden="true" /> Sem integração
+            <Radio size={20} aria-hidden="true" /> Holandeses ativo
           </p>
-          <p className="muted">Pode enriquecer o tempo de preparo no futuro</p>
+          <p className="muted">Renascença: compra solicitada, ainda sem KDS</p>
         </Card>
       </div>
 
@@ -159,6 +159,9 @@ export default function DadosCarga() {
             </AnimatePresence>
           </ul>
           <p className="muted nota-freq">Frequência de atualização ainda em aberto com o cliente: diária ou às segundas, quartas e sextas.</p>
+          <p className="muted nota-freq">
+            Se a fonte for planilha, as colunas precisam seguir o modelo fixo (a mesma exportação do painel, com as 4 etapas do KDS). Se os dados forem para o Power BI, a integração com Excel já existe e a planilha não precisa ser corrigida à mão.
+          </p>
         </Card>
       </div>
     </div>

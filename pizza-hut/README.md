@@ -18,7 +18,9 @@ Build de produção: `npm run build` (saída em `dist/`) e `npm run preview`.
 
 ## O que tem
 
-- **8 abas**: Visão geral, Entrega e iFood (selo SUPER), Faturamento, Desperdício e CMV, Vendas e mix, Estoque e previsões, Equipe, Dados e carga.
+- **8 abas**: Visão geral, Entrega e iFood (selo SUPER), Faturamento, Desperdício e CMV, Vendas e mix, Estoque e previsões, Produção (KDS), Dados e carga.
+- **Tempo de entrega** = do pedido cair na central até o motoboy sair (meta de 15 min; a loja faz ~19). O tempo até o cliente só existe para o motoboy do iFood.
+- **Produção (KDS)**: tempo por etapa (montagem, forno, corte e caixa, despacho), análise por etapa e dia, nunca por pessoa. Só os Holandeses têm KDS; a Renascença ainda não. Inclui alerta de dias fora do padrão (ex.: monitor do KDS com defeito).
 - **Filtros** de loja (todas, Holandeses, Renascença) e período (7 dias, 4 semanas, 13 semanas, 12 meses).
 - **Tema claro e escuro**, na mesma paleta dos slides (vermelho Pizza Hut). Segue o tema do sistema na primeira visita.
 - **Chef Hut**, assistente no canto inferior direito, com perguntas prontas e chat livre. É **simulado**: não usa API; as respostas vêm dos mesmos dados do painel (`src/chef/brain.js`).

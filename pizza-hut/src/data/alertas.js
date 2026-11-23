@@ -1,6 +1,7 @@
 import { CMV_MAX, CMV_MIN, DAILY, END, META_ENTREGA, MIN_MOTOBOYS, addDays, DIAS, HORAS, mapaTempo } from './daily'
 import { selecionar, somar, variacao } from './metrics'
 import { conferencia } from './estoque'
+import { maiorGargalo, mediaEtapas, nivelDespacho, ocorrencias } from './kds'
 import { LOJAS } from './daily'
 import { dec1, dec2, pct } from './format'
 
@@ -35,9 +36,9 @@ export function sinais(loja = 'all') {
     if (max.v > META_ENTREGA) {
       lista.push({
         id: 'entrega-pico',
-        nivel: max.v > META_ENTREGA + 8 ? 'bad' : 'warn',
+        nivel: nivelDespacho(max.v),
         titulo: `Renascença: ${DIAS[max.d].toLowerCase()} às ${HORAS[max.h]} em ${max.v} min`,
-        detalhe: `Pico acima da meta de ${META_ENTREGA} min nas entregas.`,
+        detalhe: `Pior horário do pedido até a saída do motoboy, para meta de ${META_ENTREGA} min.`,
         tab: 'entrega',
       })
     }
@@ -54,6 +55,30 @@ export function sinais(loja = 'all') {
         tab: 'entrega',
       })
     }
+  }
+
+  if (lojas.includes('h')) {
+    const med = mediaEtapas(selecionar('h', '30d'))
+    const nivel = nivelDespacho(med.total)
+    if (nivel !== 'ok') {
+      const g = maiorGargalo(med)
+      lista.push({
+        id: 'producao-h',
+        nivel,
+        titulo: `Holandeses: ${dec1(med.total)} min do pedido ao despacho`,
+        detalhe: `Meta de ${META_ENTREGA} min. A etapa que mais pesa é ${g.nome.toLowerCase()}: ${dec1(g.valor)} min para meta de ${dec1(g.meta)}.`,
+        tab: 'producao',
+      })
+    }
+    const falha = ocorrencias('h', 28)[0]
+    if (falha)
+      lista.push({
+        id: 'kds-fora-padrao',
+        nivel: 'warn',
+        titulo: `Holandeses: ${falha.dias} dias com despacho fora do padrão (pico de ${Math.round(falha.pico)} min)`,
+        detalhe: 'Antes de cobrar a equipe, confira o equipamento do KDS (monitor, cabo, rede).',
+        tab: 'producao',
+      })
   }
 
   for (const l of lojas) {
