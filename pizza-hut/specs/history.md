@@ -14,3 +14,7 @@
 - O tempo de entrega passou a ser do pedido até o despacho, com meta de 15 min (antes 40 min).
 - Nova aba Produção (KDS), com tempo por etapa, no lugar do ranking de pessoas da aba Equipe.
 - Alerta de dias fora do padrão e cobertura do tempo até o cliente (só motoboy iFood).
+
+## 2026-11-23 — planta da cozinha na aba Produção
+
+- Desenho 2D da cozinha vista de cima, com o tempo de cada etapa no lugar onde ela acontece (`PlantaKds.jsx`).

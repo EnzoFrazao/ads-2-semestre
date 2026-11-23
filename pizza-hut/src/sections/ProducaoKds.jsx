@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { AlertTriangle, ChefHat, Flame, PackageCheck, Pizza, Radio, Timer, Truck } from 'lucide-react'
 import { useDash } from '../state/DashContext'
+import PlantaKds from '../components/PlantaKds'
+import Segmented from '../components/Segmented'
 import { useTheme } from '../theme/ThemeProvider'
 import { DIAS, LOJAS, META_ENTREGA } from '../data/daily'
 import { PERIODOS, mediaPond, selecionar, serie, variacao } from '../data/metrics'
@@ -30,6 +33,29 @@ export default function ProducaoKds() {
   const trend = ETAPAS.map((e) => serie(rows, mediaPond(e.id), periodo))
   const labels = trend[0].labels
 
+  // Cenários da planta: média do período, sextas (o dia mais pesado) e o pior dia fora do padrão.
+  const [cenario, setCenario] = useState('media')
+  const pior = ocorrencias('h', 400).sort((a, b) => b.pico - a.pico)[0]
+  const sextas = rows.filter((r) => r.dow === 4 && !foraPadrao.has(r.date))
+  const cenarios = {
+    media: { med, texto: `Média dos últimos ${label}. O relógio começa quando o pedido cai e para quando o motoboy sai.` },
+    sexta: { med: mediaEtapas(sextas), texto: 'Média das sextas do período, o dia mais pesado da semana.' },
+    ...(pior
+      ? {
+          falha: {
+            med: mediaEtapas(pior.linhas),
+            texto: `${pior.dias === 1 ? dataCurta(pior.ini) : `${dataCurta(pior.ini)} a ${dataCurta(pior.fim)}`}, fora do padrão: o pedido ficou parado em ${pior.etapa.toLowerCase()}. Antes de cobrar a equipe, confira o KDS.`,
+          },
+        }
+      : {}),
+  }
+  const opcoes = [
+    { id: 'media', label: 'Média' },
+    { id: 'sexta', label: 'Sextas' },
+    ...(pior ? [{ id: 'falha', label: 'Dia fora do padrão' }] : []),
+  ]
+  const ativo = cenarios[cenario] ? cenario : 'media'
+
   return (
     <div className="secao">
       <div className="banner banner-info">
@@ -47,6 +73,15 @@ export default function ProducaoKds() {
           )}
         </span>
       </div>
+
+      <Card
+        i={0}
+        title="Planta da cozinha"
+        sub={cenarios[ativo].texto}
+        right={<Segmented valor={ativo} opcoes={opcoes} onChange={setCenario} grupo="planta" rotulo="Cenário da planta" escuro={false} />}
+      >
+        <PlantaKds med={cenarios[ativo].med} kdsFora={ativo === 'falha'} />
+      </Card>
 
       <div className="kpis">
         <KpiCard

@@ -25,6 +25,7 @@ hoje é um **protótipo com dados fictícios**; não há integração com os sis
 - O tempo de entrega é medido do pedido cair na central até o motoboy sair (despacho); a meta é de 15 min.
 - O tempo até o cliente só pode ser exibido para pedidos com motoboy do iFood; o painel mostra a cobertura, nunca uma estimativa para os demais.
 - A aba Produção (KDS) mostra o tempo por etapa (montagem, forno, corte e caixa, despacho) com meta por etapa cuja soma é a meta de despacho.
+- No topo da aba há uma planta ilustrativa da cozinha, vista de cima (SVG), com o tempo de cada estação colorido pelo nível, o gargalo destacado e uma pizza animada que para em cada estação na proporção do tempo. Cenários: média do período, sextas e o pior dia fora do padrão (que sugere conferir o KDS). Abaixo de 900 px vira uma lista. Não tem medidas reais.
 - A análise de produção é por etapa e dia da semana, nunca por pessoa.
 - Só os Holandeses têm dados de etapa; quando a Renascença está selecionada, a aba avisa e mostra os Holandeses.
 - Dias em que o despacho passa de 1,6 vez a mediana de 90 dias da loja aparecem como "fora do padrão", com a recomendação de checar o equipamento do KDS antes de cobrar a equipe, e geram um sinal de atenção.
