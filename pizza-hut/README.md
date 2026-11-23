@@ -14,6 +14,8 @@ npm run dev
 
 Abra http://localhost:5173. Para pular a abertura animada, use http://localhost:5173/?skip.
 
+Publicado no GitHub Pages: https://enzofrazao.github.io/ads-2-semestre/pizza-hut/ (o workflow `.github/workflows/ci-cd.yml` constrói com `--base=/ads-2-semestre/pizza-hut/` e junta ao site da atividade de CI/CD).
+
 Build de produção: `npm run build` (saída em `dist/`) e `npm run preview`.
 
 ## O que tem
