@@ -5,6 +5,10 @@
 - Painel com 8 abas, tema claro e escuro, Chef Hut simulado, modo apresentação e demonstração de carga.
 - Referência: criação de `pizza-hut/` no Git.
 
+## 2026-11-23 — publicação no GitHub Pages
+
+- O protótipo passou a ser publicado em `/pizza-hut/` do site de Pages do repositório, ao lado da atividade de CI/CD.
+
 ## 2026-11-23 — ajuste após reunião de apresentação ao cliente
 
 - O tempo de entrega passou a ser do pedido até o despacho, com meta de 15 min (antes 40 min).

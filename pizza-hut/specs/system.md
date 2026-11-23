@@ -13,6 +13,10 @@ estática de uma página, sem back-end. **Todos os dados são fictícios**, gera
 - Vite, React 18, Apache ECharts (`echarts-for-react`), Framer Motion, fontes locais.
 - `src/main.jsx` monta `src/App.jsx`; `npm run dev` (porta 5173) e `npm run build` (saída em `dist/`).
 - Nenhum teste automatizado e nenhum lint configurado (ver `testing.md`).
+- Publicação: GitHub Pages em `https://enzofrazao.github.io/ads-2-semestre/pizza-hut/`. O workflow
+  `.github/workflows/ci-cd.yml` (na raiz do repositório) constrói com `--base=/ads-2-semestre/pizza-hut/`
+  e junta o resultado ao site da atividade de CI/CD, que fica na raiz do mesmo site. Dispara em push na
+  `main` com mudanças em `pizza-hut/**`. Fora do Pages, o `dist/` usa a base padrão (`/`).
 
 ## Fronteiras e fluxo
 
