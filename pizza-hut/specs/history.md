@@ -18,3 +18,9 @@
 ## 2026-11-23 — planta da cozinha na aba Produção
 
 - Desenho 2D da cozinha vista de cima, com o tempo de cada etapa no lugar onde ela acontece (`PlantaKds.jsx`).
+
+## 2026-11-25 — decisões do cliente e novas funcionalidades
+
+- Decisões P-001 a P-005 fechadas (meta de 15 min, carga diária, fontes por planilha e API, regra de estoque por item).
+- Novos: resumo do dia, aviso de dados desatualizados, alerta de atraso na planta, comparativo semana a semana, placar entre lojas, mapa de pico de pedidos e divergência crescente de estoque.
+- Volume de pedidos fictício reduzido (cerca de 1.800 por semana, antes quase 5 mil) para ficar realista.

@@ -10,6 +10,7 @@ import { brl, brlCompacto, dataCurta, dec1, int, pct, sinal } from '../data/form
 import Card, { Pill, Status } from '../components/Card'
 import KpiCard from '../components/KpiCard'
 import DataTable from '../components/DataTable'
+import DivergenciaCrescente from '../components/DivergenciaCrescente'
 import Chart, { NOME_LOJA, eixoCat, eixoVal, grade, legenda, lojasVisiveis } from '../components/Chart'
 
 export default function EstoquePrevisoes() {
@@ -165,8 +166,10 @@ export default function EstoquePrevisoes() {
         </Card>
       </div>
 
+      <DivergenciaCrescente loja={loja} i={5} />
+
       <Card
-        i={5}
+        i={6}
         title="Conferência de estoque"
         sub="Contagem física contra o estoque teórico. Divergência acima de 5% pede investigação, não é acusação."
         right={

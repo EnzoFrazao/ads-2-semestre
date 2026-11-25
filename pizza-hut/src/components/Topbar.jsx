@@ -1,4 +1,5 @@
-import { Moon, Play, Sun } from 'lucide-react'
+import { useState } from 'react'
+import { FileText, Moon, Play, Sun } from 'lucide-react'
 import logo from '../assets/logo-pizzahut.png'
 import { useTheme } from '../theme/ThemeProvider'
 import { useDash } from '../state/DashContext'
@@ -6,6 +7,8 @@ import { PERIODOS } from '../data/metrics'
 import { dataLonga } from '../data/format'
 import Segmented from './Segmented'
 import ExportButton from './ExportButton'
+import ResumoDiario from './ResumoDiario'
+import { horasDesdeCarga, nivelFrescor, textoDefasagem } from '../data/frescor'
 
 const OPCOES_LOJA = [
   { id: 'all', label: 'Todas' },
@@ -16,7 +19,10 @@ const OPCOES_PERIODO = Object.entries(PERIODOS).map(([id, p]) => ({ id, label: p
 
 export default function Topbar() {
   const { theme, toggle } = useTheme()
-  const { loja, setLoja, periodo, setPeriodo, setPresenting, ultimaCarga } = useDash()
+  const { loja, setLoja, periodo, setPeriodo, setPresenting, ultimaCarga, agora } = useDash()
+  const [resumo, setResumo] = useState(false)
+  const horas = horasDesdeCarga(ultimaCarga, agora)
+  const frescor = nivelFrescor(horas)
   return (
     <header className="topbar">
       <div className="topbar-squares" aria-hidden="true">
@@ -31,7 +37,8 @@ export default function Topbar() {
         <div>
           <h1>Painel de gestão</h1>
           <p>
-            Holandeses × Renascença · carga de {dataLonga(ultimaCarga.data)}, {ultimaCarga.hora}
+            Holandeses × Renascença · carga de {dataLonga(ultimaCarga.data)}, {ultimaCarga.hora}{' '}
+            <span className={`frescor frescor-${frescor}`}>({textoDefasagem(horas)})</span>
           </p>
         </div>
       </div>
@@ -44,6 +51,10 @@ export default function Topbar() {
           <Play size={16} aria-hidden="true" />
           <span className="btn-rot">Apresentar</span>
         </button>
+        <button className="btn-top" onClick={() => setResumo(true)}>
+          <FileText size={16} aria-hidden="true" />
+          <span className="btn-rot">Resumo do dia</span>
+        </button>
         <ExportButton />
         <button
           className="btn-top btn-icone"
@@ -54,6 +65,7 @@ export default function Topbar() {
           {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
         </button>
       </div>
+      <ResumoDiario aberto={resumo} onFechar={() => setResumo(false)} />
     </header>
   )
 }

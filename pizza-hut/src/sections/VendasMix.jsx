@@ -8,6 +8,7 @@ import { DIAS } from '../data/daily'
 import { SABORES } from '../data/custos'
 import { chavesMes } from '../data/previsao'
 import { brlCent, brlCompacto, int } from '../data/format'
+import PicoPedidos from '../components/PicoPedidos'
 import Card from '../components/Card'
 import KpiCard from '../components/KpiCard'
 import Chart, { NOME_LOJA, eixoCat, eixoVal, grade, legenda, lojasVisiveis, serieBarra, serieLinha } from '../components/Chart'
@@ -108,6 +109,7 @@ export default function VendasMix() {
           />
         </Card>
       </div>
+      <PicoPedidos i={5} />
       <p className="nota-fim">
         {vis.map((l) => NOME_LOJA[l]).join(' e ')}: dados fictícios. O mix por sabor é uma amostra de demonstração, ainda não vem do sistema real.
       </p>

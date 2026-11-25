@@ -11,6 +11,7 @@ import KpiCard from '../components/KpiCard'
 import Chart, { eixoCat, eixoVal, grade, legenda, lojasVisiveis, serieBarra, serieLinha } from '../components/Chart'
 import Comparativo from '../components/Comparativo'
 import AlertList from '../components/AlertList'
+import ComparativoSemana from '../components/ComparativoSemana'
 
 export default function VisaoGeral() {
   const { c } = useTheme()
@@ -86,6 +87,7 @@ export default function VisaoGeral() {
           />
         </Card>
       </div>
+      <ComparativoSemana i={6} />
     </div>
   )
 }

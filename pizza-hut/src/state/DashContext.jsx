@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { ULTIMA_CARGA } from '../data/daily'
+import { AGORA_INICIAL } from '../data/frescor'
 import { selecionar, somar, PERIODOS } from '../data/metrics'
 
 export const TABS = [
@@ -21,6 +22,7 @@ export function DashProvider({ children }) {
   const [tab, setTab] = useState('geral')
   const [presenting, setPresenting] = useState(false)
   const [ultimaCarga, setUltimaCarga] = useState(ULTIMA_CARGA)
+  const [agora, setAgora] = useState(AGORA_INICIAL)
 
   const irPara = useCallback((id, opcoes = {}) => {
     setTab(id)
@@ -29,8 +31,8 @@ export function DashProvider({ children }) {
   }, [])
 
   const value = useMemo(
-    () => ({ loja, setLoja, periodo, setPeriodo, tab, setTab, irPara, presenting, setPresenting, ultimaCarga, setUltimaCarga }),
-    [loja, periodo, tab, presenting, ultimaCarga, irPara],
+    () => ({ loja, setLoja, periodo, setPeriodo, tab, setTab, irPara, presenting, setPresenting, ultimaCarga, setUltimaCarga, agora, setAgora }),
+    [loja, periodo, tab, presenting, ultimaCarga, agora, irPara],
   )
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }

@@ -1,6 +1,6 @@
 # Estratégia e mapa de testes
 
-**Última verificação:** 2026-11-23
+**Última verificação:** 2026-11-25
 
 ## Gates
 
@@ -10,7 +10,7 @@
 
 ## Responsabilidade por camada
 
-Não há testes automatizados. A conferência de comportamento é manual: abrir `npm run dev`, percorrer
+Não há testes automatizados. Em 2026-11-25 as funcionalidades novas foram conferidas no navegador (aviso de dados desatualizados e simulação de atraso, resumo do dia, alerta da planta, mapa de pico, divergência crescente, placar e comparativo semanal), sem erro no console. A conferência de comportamento é manual: abrir `npm run dev`, percorrer
 as abas nos temas claro e escuro, e conferir que os números das telas, dos alertas e do Chef Hut
 batem entre si (todos saem de `src/data/`).
 

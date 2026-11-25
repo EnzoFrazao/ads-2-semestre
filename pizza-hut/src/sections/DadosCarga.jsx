@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, CircleDashed, DatabaseZap, FileSpreadsheet, Loader2, Radio, UploadCloud } from 'lucide-react'
 import { useDash } from '../state/DashContext'
 import { dataLonga, int } from '../data/format'
+import { AGORA_INICIAL } from '../data/frescor'
+import { addDays } from '../data/daily'
 import Card, { Pill, Status } from '../components/Card'
 
 const ETAPAS = ['Lendo o arquivo', 'Conferindo as colunas', 'Validando tipos e datas', 'Procurando duplicidades', 'Procurando campos vazios', 'Gerando o relatório']
@@ -23,8 +25,10 @@ const HISTORICO = [
   { quando: '06/11/2026, 08:02', origem: 'Sistema Pizza Hut', nivel: 'bad', nota: 'Planilha inválida, carga recusada' },
 ]
 
+const avancar = (a, dias) => ({ data: addDays(a.data, dias), hora: a.hora })
+
 export default function DadosCarga() {
-  const { ultimaCarga, setUltimaCarga } = useDash()
+  const { ultimaCarga, setUltimaCarga, agora, setAgora } = useDash()
   const [fase, setFase] = useState('espera') // espera | lendo | pronto | aplicado
   const [passo, setPasso] = useState(0)
   const [arquivo, setArquivo] = useState('')
@@ -49,10 +53,8 @@ export default function DadosCarga() {
   }
 
   const aplicar = () => {
-    const agora = new Date()
-    const hora = agora.toTimeString().slice(0, 5)
-    setUltimaCarga({ data: '2026-11-11', hora })
-    setHistorico((h) => [{ quando: `11/11/2026, ${hora}`, origem: arquivo, nivel: 'warn', nota: 'Carga manual, 3 alertas' }, ...h])
+    setUltimaCarga({ data: agora.data, hora: agora.hora })
+    setHistorico((h) => [{ quando: `${dataLonga(agora.data).slice(0, 10)}, ${agora.hora}`, origem: arquivo, nivel: 'warn', nota: 'Carga manual, 3 alertas' }, ...h])
     setFase('aplicado')
   }
 
@@ -158,7 +160,11 @@ export default function DadosCarga() {
               ))}
             </AnimatePresence>
           </ul>
-          <p className="muted nota-freq">Frequência de atualização ainda em aberto com o cliente: diária ou às segundas, quartas e sextas.</p>
+          <div className="dz-botoes simula">
+            <button className="btn-sec" onClick={() => setAgora(avancar(agora, 2))}>Simular 2 dias sem carga</button>
+            <button className="btn-sec" onClick={() => setAgora(AGORA_INICIAL)}>Voltar ao normal</button>
+          </div>
+          <p className="muted nota-freq">Frequência de atualização combinada: diária. O painel avisa quando a última carga passa de 26 h e fica crítico acima de 50 h. Os botões acima só simulam a passagem do tempo.</p>
           <p className="muted nota-freq">
             Se a fonte for planilha, as colunas precisam seguir o modelo fixo (a mesma exportação do painel, com as 4 etapas do KDS). Se os dados forem para o Power BI, a integração com Excel já existe e a planilha não precisa ser corrigida à mão.
           </p>
