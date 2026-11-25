@@ -2,7 +2,7 @@
 id: core
 contract_status: draft
 implementation_status: partial
-last_verified: 2026-11-23
+last_verified: 2026-11-25
 last_verified_ref: working-tree
 ---
 
@@ -18,7 +18,7 @@ hoje é um **protótipo com dados fictícios**; não há integração com os sis
 
 - Dono e gerentes consultam; não há login nem perfis neste protótipo.
 - Entradas: filtros de loja (todas, Holandeses, Renascença) e período (7 dias, 4, 13 semanas, 12 meses).
-- Resultados: indicadores, gráficos, sinais amarelo e vermelho, exportação em CSV e impressão em PDF.
+- Resultados: indicadores, gráficos, sinais amarelo e vermelho, exportação em CSV, impressão em PDF e o resumo do dia (copiar texto ou imprimir).
 
 ## Contrato comportamental e critérios de aceite
 
@@ -30,6 +30,12 @@ hoje é um **protótipo com dados fictícios**; não há integração com os sis
 - Só os Holandeses têm dados de etapa; quando a Renascença está selecionada, a aba avisa e mostra os Holandeses.
 - Dias em que o despacho passa de 1,6 vez a mediana de 90 dias da loja aparecem como "fora do padrão", com a recomendação de checar o equipamento do KDS antes de cobrar a equipe, e geram um sinal de atenção.
 - Os dados do iFood têm até 48 h de defasagem e isso é avisado na tela.
+- A carga é diária. Com a última carga há mais de 26 h o topo mostra aviso de atenção e, acima de 50 h, crítico; a data e a defasagem aparecem no cabeçalho. A tela Dados e carga tem botões que só simulam a passagem do tempo.
+- Quando o tempo até o despacho passa da meta, a planta da cozinha mostra um alerta com a etapa que mais atrasa; estações muito acima da meta piscam.
+- A Visão geral compara cada um dos últimos 7 dias com o mesmo dia da semana anterior (tempo de despacho) e mostra o placar entre as lojas (indicadores em que cada uma está melhor).
+- A aba Vendas e mix tem o mapa de calor de pedidos por dia e horário (18h a 23h); a distribuição por hora é fictícia.
+- A aba Estoque lista os itens com divergência crescente em 3 contagens seguidas, nunca por pessoa.
+- O resumo do dia (botão no topo) traz o último dia fechado, a variação contra o mesmo dia da semana anterior e os 3 sinais mais graves.
 - O selo SUPER do iFood é avaliado por nota (mínimo 4,7), cancelamento (abaixo de 1%) e taxa de acordo (abaixo de 2,5%).
 - O CMV aceito é de 28% a 32%; fora disso gera sinal.
 
@@ -41,17 +47,17 @@ hoje é um **protótipo com dados fictícios**; não há integração com os sis
 
 ## Estado atual e lacunas
 
-Implementado como protótipo: as 8 abas, filtros, alertas, exportação, tema, Chef Hut simulado e modo apresentação.
-Lacunas: nenhuma integração real, carga de planilha só demonstrativa, sem login, sem testes automatizados,
-sem tempo até o cliente para a cooperativa, sem KDS na Renascença. Regras ainda em aberto estão em
-[open-decisions.md](../open-decisions.md).
+Implementado como protótipo: as 8 abas, filtros, alertas, exportação, tema, Chef Hut simulado, modo apresentação, resumo do dia, aviso de dados desatualizados, comparativo semanal, placar entre lojas, mapa de pico de pedidos e divergência crescente de estoque.
+Lacunas: nenhuma integração real (a fonte será planilha e API de banco de dados), carga de planilha só
+demonstrativa, sem login, sem testes automatizados, sem tempo até o cliente para a cooperativa, sem KDS na
+Renascença. Não há decisão de negócio aberta; as fechadas estão em [open-decisions.md](../open-decisions.md).
 
 ## Evidências de implementação e teste
 
-- Implementação: `src/data/daily.js`, `src/data/kds.js`, `src/data/alertas.js`, `src/sections/ProducaoKds.jsx`, `src/sections/EntregaIfood.jsx`.
+- Implementação: `src/data/daily.js`, `src/data/kds.js`, `src/data/alertas.js`, `src/data/frescor.js`, `src/sections/ProducaoKds.jsx`, `src/sections/EntregaIfood.jsx`, `src/components/{PlantaKds,ComparativoSemana,PicoPedidos,DivergenciaCrescente,ResumoDiario,AvisoDados}.jsx`.
 - Gate executável: `npm run build`. Não há teste automatizado de comportamento; ver [testing.md](../testing.md).
 
 ## Relações
 
-- Decisões abertas: `P-001` a `P-005`, em [open-decisions.md](../open-decisions.md).
+- Decisões `P-001` a `P-005` (todas resolvidas), em [open-decisions.md](../open-decisions.md).
 - ADR relacionado: nenhum.

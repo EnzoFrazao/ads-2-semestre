@@ -312,6 +312,12 @@ export default function PlantaKds({ med, kdsFora = false }) {
 
   return (
     <div className="planta">
+      {med.total > META_ENTREGA && (
+        <div className={`planta-alerta planta-alerta-${nivelTotal}`} role="alert">
+          <strong>Pedido acima da meta: {dec1(med.total)} min para {META_ENTREGA} min.</strong>{' '}
+          {temGargalo ? `A etapa que mais atrasa é ${gargalo.nome.toLowerCase()}, com ${dec1(gargalo.valor)} min.` : 'O atraso está espalhado entre as etapas.'}
+        </div>
+      )}
       <svg className="planta-svg" viewBox={`0 0 ${W} ${H_SVG}`} role="img" aria-label={resumo}>
         <defs>
           <pattern id={`piso${uid}`} width="40" height="40" patternUnits="userSpaceOnUse">

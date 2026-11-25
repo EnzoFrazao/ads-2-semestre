@@ -3,6 +3,7 @@ import { ThemeProvider } from './theme/ThemeProvider'
 import { DashProvider, useDash } from './state/DashContext'
 import Topbar from './components/Topbar'
 import Tabs from './components/Tabs'
+import AvisoDados from './components/AvisoDados'
 import Splash from './components/Splash'
 import ModoApresentacao from './components/ModoApresentacao'
 import ChefHut from './chef/ChefHut'
@@ -35,6 +36,7 @@ function Shell() {
       <Topbar />
       <Tabs />
       <main className="conteudo" id="conteudo">
+        <AvisoDados />
         <AnimatePresence mode="wait">
           <motion.div key={tab} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.28 }}>
             {/* a chave de filtros refaz os gráficos e repete a animação de entrada */}

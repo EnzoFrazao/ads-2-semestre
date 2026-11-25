@@ -33,7 +33,7 @@ export const SEAS = [0.98, 0.9, 0.95, 0.97, 1.0, 0.96, 0.94, 0.97, 1.0, 1.04, 1.
 
 const CFG = {
   h: {
-    ped: [190, 185, 195, 225, 310, 400, 430],
+    ped: [70, 65, 75, 95, 140, 180, 195],
     ticket: 74,
     canal: { salao: 0.6, ifood: 0.24, balcao: 0.09, app: 0.07 },
     tempo: 16.5,
@@ -43,10 +43,10 @@ const CFG = {
     nota: 4.78,
     cancel: 0.5,
     acordo: 1.8,
-    growth: 0.0004,
+    growth: 0.0002,
   },
   r: {
-    ped: [90, 85, 95, 120, 250, 360, 390],
+    ped: [35, 30, 38, 50, 110, 160, 175],
     ticket: 52,
     canal: { salao: 0, ifood: 0.57, balcao: 0.17, app: 0.26 },
     tempo: 19.5,
@@ -56,7 +56,7 @@ const CFG = {
     nota: 4.74,
     cancel: 0.75,
     acordo: 2.2,
-    growth: 0.0007,
+    growth: 0.0004,
   },
 }
 
